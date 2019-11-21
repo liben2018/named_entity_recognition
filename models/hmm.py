@@ -18,9 +18,9 @@ class HMM(object):
         self.Pi = torch.zeros(N)
 
     def train(self, word_lists, tag_lists, word2id, tag2id):
-        """HMM的训练，即根据训练语料对模型参数进行估计,
-           因为我们有观测序列以及其对应的状态序列，所以我们
-           可以使用极大似然估计的方法来估计隐马尔可夫模型的参数
+        """
+        HMM的训练，即根据训练语料对模型参数进行估计, 因为我们有观测序列以及其对应的状态序列，
+        所以我们可以使用极大似然估计的方法来估计隐马尔可夫模型的参数
         参数:
             word_lists: 列表，其中每个元素由字组成的列表，如 ['担','任','科','员']
             tag_lists: 列表，其中每个元素是由对应的标注组成的列表，如 ['O','O','B-TITLE', 'E-TITLE']
@@ -29,7 +29,6 @@ class HMM(object):
         """
 
         assert len(tag_lists) == len(word_lists)
-
         # 估计转移概率矩阵
         for tag_list in tag_lists:
             seq_len = len(tag_list)
