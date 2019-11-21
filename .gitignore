@@ -1,2 +1,6 @@
 __pycache__
 models/__pycache__
+
+# FA data and trained weights!
+data/
+weights/
