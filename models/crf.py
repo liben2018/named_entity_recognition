@@ -1,8 +1,8 @@
 from sklearn_crfsuite import CRF
-
 from .util import sent2features
 
 
+# https://sklearn-crfsuite.readthedocs.io/en/latest/_modules/sklearn_crfsuite/estimator.html#CRF
 class CRFModel(object):
     def __init__(self,
                  algorithm='lbfgs',

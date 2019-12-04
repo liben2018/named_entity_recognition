@@ -61,6 +61,15 @@ class BiLSTM(nn.Module):
     def forward(self, sents_tensor, lengths):
         emb = self.embedding(sents_tensor)  # [B, L, emb_size]
         packed = pack_padded_sequence(emb, lengths, batch_first=True)
+        #
+        """ avoid warning:
+        /opt/conda/conda-bld/pytorch_1565272279342/work/aten/src/ATen/native/cudnn/RNN.cpp:1236: 
+        UserWarning: RNN module weights are not part of single contiguous chunk of memory. 
+        This means they need to be compacted at every call, possibly greatly increasing memory usage. 
+        To compact weights again call flatten_parameters().
+        """
+        self.bilstm.flatten_parameters()
+        #
         rnn_out, _ = self.bilstm(packed)  # rnn_out: [B, L, hidden_size*2]
         rnn_out, _ = pad_packed_sequence(rnn_out, batch_first=True)
         scores = self.lin(rnn_out)  # [B, L, out_size]

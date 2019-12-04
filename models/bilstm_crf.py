@@ -172,14 +172,13 @@ class BiLSTM_CRF(nn.Module):
         self.transition = nn.Parameter(torch.ones(out_size, out_size) * 1/out_size)
         # Adding a CRF layer, actually means, to learn a transition matrix with size of [out_size, out_size]
         # which initialized by uniform distribution.
-        # self.transition.data.zero_()
 
     def forward(self, sents_tensor, lengths):
         # [B, L, out_size]
         emission = self.bilstm(sents_tensor, lengths)
         # computing CRF scores, the size of scores is [B, L, out_size, out_size]
         # each word(char) corresponding a matrix with size of [out_size, out_size]
-        # (the meaning for element located in i-th row and j-th coloum of the matrix:
+        # (the meaning for element located in i-th row and j-th column of the matrix:
         # the score for in time (t-1) tag = i, in time (t) tag = j)
         # 这个矩阵第i行第j列的元素的含义是：上一时刻tag为i，这一时刻tag为j的分数
         batch_size, max_len, out_size = emission.size()

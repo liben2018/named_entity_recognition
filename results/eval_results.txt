@@ -1,0 +1,42 @@
+accuracy = 0.8918934720963545
+f1 = 0.6702840727736994
+precision = 0.6704980842911877
+recall = 0.6700701978302489
+report: =                                            precision    recall  f1-score   support
+
+                               due_date_v       0.44      0.24      0.31        17
+                    account_type_ordinary       1.00      1.00      1.00        80
+                         invoice_amount_v       0.57      0.65      0.61        91
+                       transfer_account_2       0.86      0.93      0.89        96
+                      biller_company_name       0.52      0.62      0.56        91
+                         transfer_account       0.83      0.81      0.82       114
+                           invoice_date_v       0.66      0.85      0.75        74
+                             biller_tel_v       0.74      0.76      0.75        87
+                              bank_number       0.94      0.90      0.92       125
+                         suppliers_code_v       0.77      0.82      0.80        67
+                            current_tax_v       0.59      0.73      0.65        67
+                     billing_company_name       0.63      0.73      0.68        97
+                         balance_amount_v       0.00      0.00      0.00         7
+                        billing_balance_v       0.00      0.00      0.00        11
+                         invoice_number_v       0.54      0.44      0.49        57
+                             biller_fax_v       0.80      0.88      0.83        49
+                             close_date_v       0.46      0.52      0.49        62
+                     account_type_current       0.93      0.93      0.93        15
+                           transfer_fee_v       0.91      1.00      0.95        10
+                               other_date       0.35      0.07      0.12        80
+           purchase_amount_tax_excluded_v       0.60      0.48      0.54        54
+                         deposit_amount_v       0.62      0.23      0.33        22
+                    prev_invoice_amount_v       0.90      0.45      0.60        20
+                           biller_address       0.50      0.65      0.56        88
+           purchase_amount_tax_included_v       0.22      0.28      0.25        39
+                            branch_code_v       0.67      1.00      0.80         2
+                           account_holder       0.35      0.35      0.35        17
+                        brought_forward_v       0.33      0.45      0.38        11
+                      account_holder_kana       0.40      0.40      0.40         5
+                   billing_company_name_2       0.00      0.00      0.00         7
+purchase_additional_amount_tax_included_v       0.00      0.00      0.00         2
+purchase_deductible_amount_tax_included_v       0.00      0.00      0.00         3
+
+                                micro avg       0.67      0.67      0.67      1567
+                                macro avg       0.66      0.67      0.65      1567
+

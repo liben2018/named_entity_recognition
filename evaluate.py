@@ -4,15 +4,17 @@ from collections import Counter
 from models.hmm import HMM
 from models.crf import CRFModel
 from models.bilstm_crf import BILSTM_Model
-from utils import save_model, flatten_lists, load_model
-from evaluating import Metrics, get_ner_fmeasure, results_as_entities
+from utils.utils import save_model, flatten_lists, load_model
+from metrics import Metrics, get_ner_fmeasure, results_as_entities
 from models.config import LSTMConfig
 
 
-def results_print(test_tag_lists, pred_tag_lists, remove_O=False):
+def results_print(test_tag_lists, pred_tag_lists, results_abs_path=None, remove_O=False):
     use_original_metrix = False
     use_entity_level_metrix = False  # Not work for char-level labels to get entity-level
     use_seqeval = True
+    if results_abs_path is None:
+        results_abs_path = "/home/ben/named_entity_recognition/results/eval_results.txt"
     if use_original_metrix:
         metrics = Metrics(test_tag_lists, pred_tag_lists, remove_O=remove_O)
         metrics.report_scores()
@@ -20,7 +22,7 @@ def results_print(test_tag_lists, pred_tag_lists, remove_O=False):
     elif use_entity_level_metrix:
         get_ner_fmeasure(test_tag_lists, pred_tag_lists, label_type="BIOES")
     elif use_seqeval:
-        results = seqeval_output(test_tag_lists, pred_tag_lists)
+        results = results_as_entities(test_tag_lists, pred_tag_lists, results_abs_path=results_abs_path)
         print(results)
     else:
         from sklearn.metrics import classification_report, confusion_matrix
@@ -90,7 +92,7 @@ def bilstm_train_and_eval(train_data, dev_data, test_data, word2id, tag2id,
         model_name = "bilstm"
     emb_size = LSTMConfig.emb_size
     hidden_size = LSTMConfig.hidden_size
-    model_file = "./ckpts/" + model_name + '_' + str(emb_size) + '_' + str(hidden_size) + ".pkl"
+    model_file = "./weights/" + model_name + '_' + str(emb_size) + '_' + str(hidden_size) + ".pkl"
 
     if reload_model:
         # reload trained model!

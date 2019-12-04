@@ -1,5 +1,5 @@
-from data import build_corpus
-from utils import extend_maps, prepocess_data_for_lstmcrf
+from utils.create_dataset import build_corpus
+from utils.utils import extend_maps, prepocess_data_for_lstmcrf
 from evaluate import hmm_train_eval, crf_train_eval, bilstm_train_and_eval, ensemble_evaluate
 
 
@@ -15,7 +15,7 @@ def main():
 
     # Data
     print("Reading data:")
-    ner_data_dir = "./FA_NER_Data_IOB"
+    ner_data_dir = "./datasets/FA_NER_Data_IOB"
     train_word_lists, train_tag_lists, word2id, tag2id = build_corpus("train", data_dir=ner_data_dir)
     dev_word_lists, dev_tag_lists = build_corpus("dev", make_vocab=False, data_dir=ner_data_dir)
     test_word_lists, test_tag_lists = build_corpus("test", make_vocab=False, data_dir=ner_data_dir)

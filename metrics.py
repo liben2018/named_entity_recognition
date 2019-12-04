@@ -1,12 +1,13 @@
 from __future__ import print_function
-import sys, os
+import sys
+import os
 
 from collections import Counter
-from utils import flatten_lists
+from utils.utils import flatten_lists
 from seqeval.metrics import precision_score, recall_score, f1_score, classification_report, accuracy_score
 
 
-def results_as_entities(out_label_list, preds_list):
+def results_as_entities(out_label_list, preds_list, results_abs_path):
     results = {
         "precision": precision_score(out_label_list, preds_list),
         "recall": recall_score(out_label_list, preds_list),
@@ -15,8 +16,7 @@ def results_as_entities(out_label_list, preds_list):
         "report:": classification_report(out_label_list, preds_list, digits=2)
     }
 
-    output_eval_file = os.path.join(os.getcwd(), "eval_results.txt")
-    with open(output_eval_file, "w") as writer:
+    with open(results_abs_path, "w") as writer:
         for key in sorted(results.keys()):
             writer.write("{} = {}\n".format(key, str(results[key])))
 
@@ -404,7 +404,6 @@ def fmeasure_from_singlefile(twolabel_file, label_type="BMES", pred_col=-1):
 
 
 if __name__ == '__main__':
-    # print "sys:",len(sys.argv)
     if len(sys.argv) == 3:
         fmeasure_from_singlefile(sys.argv[1], "BMES", int(sys.argv[2]))
     else:
